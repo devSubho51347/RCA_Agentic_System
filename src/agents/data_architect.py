@@ -31,7 +31,7 @@ class DataArchitectAgent(Agent):
             # crude split
             if "```python" in content:
                 md_part, code_part = content.split("```python", 1)
-                code = code_part.split("```", 1)[0]
+                code =  code_part.split("```", 1)[0]
             else:
                 md_part, code = content, "# No code returned"
             return md_part.strip(), code.strip()
