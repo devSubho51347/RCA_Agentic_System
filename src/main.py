@@ -9,10 +9,15 @@ OUTPUT_PLAN_DIR = BASE_DIR / "output" / "plan"
 OUTPUT_RESULTS_DIR = BASE_DIR / "output" / "results"
 
 
+
+
 def main():
     parser = argparse.ArgumentParser(description="Run RCA Agent pipeline")
     parser.add_argument("question", nargs="?", default="Why has the reorder rate dropped in the snacks department over the last quarter?", help="High-level RCA question")
     args = parser.parse_args()
+
+    print("Running RCA Agent pipeline with question:", args.question)
+    # print(args.question)
 
     crew_a = CrewA()
     crew_b = CrewB()
@@ -27,6 +32,6 @@ def main():
     crew_b.run(subs, KNOWLEDGE_DIR, OUTPUT_PLAN_DIR, OUTPUT_RESULTS_DIR)
     print("Done. Check output/ for results.")
 
-
+ 
 if __name__ == "__main__":
     main()

@@ -6,7 +6,7 @@ class RCAAnalystAgent(Agent):
     """Parses high-level RCA questions and generates sub-questions via LLM."""
 
     def __init__(self, model: str = "gpt-3.5-turbo"):
-        super().__init__()
+        super().__init__(role="RCA Analyst", goal="Generate RCA sub-questions", backstory="Expert analyst breaking down complex business questions into actionable sub-questions.")
         self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
         self.model = model
 

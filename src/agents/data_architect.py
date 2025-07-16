@@ -6,7 +6,7 @@ class DataArchitectAgent(Agent):
     """Translates sub-questions into executable analysis plans."""
 
     def __init__(self, model: str = "gpt-3.5-turbo"):
-        super().__init__()
+        super().__init__(role="Lead Data Architect", goal="Translate RCA sub-questions into executable plans", backstory="Veteran data architect with expertise in analytics and visualization best practices.")
         self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
         self.model = model
 
