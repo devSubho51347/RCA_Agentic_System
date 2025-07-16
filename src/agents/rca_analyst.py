@@ -7,10 +7,9 @@ class RCAAnalystAgent(Agent):
 
     def __init__(self, model: str = "gpt-3.5-turbo"):
         super().__init__(role="RCA Analyst", goal="Generate RCA sub-questions", backstory="Expert analyst breaking down complex business questions into actionable sub-questions.")
-        self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-        self.model = model
+        # self.model = model
 
-    def generate_subquestions(self, question: str, schema_markdown: str, n_subq: int = 3):
+    def generate_subquestions(self, question: str, schema_markdown: str, n_subq: int = 2):
         """Generate sub-questions using the LLM."""
         prompt = (
             "You are an RCA analyst. Given the table schemas below and an RCA question, "
@@ -18,8 +17,9 @@ class RCAAnalystAgent(Agent):
             "resolve the RCA.\n\nSchemas:\n{}\n\nRCA question: {}\n\nSub-questions:".format(n_subq, schema_markdown, question)
         )
         try:
-            response = self.client.chat.completions.create(
-                model=self.model,
+            client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+            response = client.chat.completions.create(
+                model= "gpt-4o-mini",
                 messages=[{"role": "system", "content": "You are an expert data analyst."},
                           {"role": "user", "content": prompt}],
                 temperature=0.3,
